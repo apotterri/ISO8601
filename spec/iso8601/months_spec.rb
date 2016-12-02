@@ -7,6 +7,8 @@ RSpec.describe ISO8601::Months do
   let(:common_february) { ISO8601::DateTime.new('2010-02-01') }
   let(:leap_february) { ISO8601::DateTime.new('2000-02-01') }
 
+  let(:common_december) { ISO8601::DateTime.new('2016-12-01') }
+
   describe 'Atomic' do
     let(:subject) { ISO8601::Months.new(1) }
 
@@ -69,6 +71,10 @@ RSpec.describe ISO8601::Months do
       expect(ISO8601::Months.new(2).to_seconds(leap_february)).to eq(5184000)
       expect(ISO8601::Months.new(12).to_seconds(leap_february)).to eq(31622400)
       expect(ISO8601::Months.new(12).to_seconds(leap_february)).to eq(ISO8601::Years.new(1).to_seconds(leap_year))
+    end
+    
+    it "should calculate zero durations in december" do
+      expect(ISO8601::Months.new(0).to_seconds(common_december)).to eq(0)
     end
   end
 

@@ -69,7 +69,7 @@ module ISO8601
 
     def zero_calculation(base)
       month = (base.month <= 12) ? base.month : (base.month % 12)
-      year = base.year + ((base.month) / 12).to_i
+      year = base.month == 12 ? base.year : base.year + ((base.month) / 12).to_i
 
       (::Time.utc(year, month) - ::Time.utc(base.year, base.month))
     end
